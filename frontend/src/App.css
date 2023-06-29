@@ -1,0 +1,44 @@
+.myNavbar{
+    display: flex;
+}
+
+.myNavbar > * {
+    padding: 20px;
+    list-style: none;
+}
+
+.myNavbar > li {
+    padding-top: 40px;
+    font-size: 20px;
+}
+
+.specialLi {
+    margin-left : auto;
+}
+
+img {
+    width : 50px;
+    height : 50px;
+}
+
+input {
+    width : 20px;
+    height : 20px;
+    border-radius: 0;
+    text-align: center;
+}
+
+.cell {
+    border : 1px solid lightgray;
+    margin:1px;
+}
+
+.grid {
+    border : 1px solid black;
+    width : 249px ;
+    height : 231px ;
+}
+
+/* .cell[id="2"] {
+    border-top : 1px solid black;
+} */
