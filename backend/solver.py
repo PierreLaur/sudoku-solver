@@ -61,13 +61,14 @@ def solve(grid):
     solver = cp_model.CpSolver()
     status = solver.Solve(model)
 
-    if status not in (cp_model.FEASIBLE, cp_model.OPTIMAL):
-        print("No solution found")
-        exit()
+    if status in (cp_model.FEASIBLE, cp_model.OPTIMAL):
+        solution = [[solver.Value(digits[i][j]) for j in range(9)] for i in range(9)]
+        status = 0
+    else:
+        solution = []
+        status = 1
 
-    solution = [[solver.Value(digits[i][j]) for j in range(9)] for i in range(9)]
-
-    return solution
+    return solution, status
 
 
 def main():

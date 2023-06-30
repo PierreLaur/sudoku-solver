@@ -6,6 +6,7 @@
 <main>
     <div class="card">
         <Grid />
+        <br />
         <SolveButton />
     </div>
 </main>

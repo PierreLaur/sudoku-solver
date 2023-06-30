@@ -1,8 +1,12 @@
 <script>
-    let grid = new Array(9).fill("").map(() => new Array(9).fill(""))
+    import { grid } from "./stores"
+    let myGrid = new Array(9).fill(null).map(() => new Array(9).fill(null))
+    grid.set(myGrid)
+    grid.subscribe((value) => (myGrid = value))
 
     function setValue(rowIdx, colIdx, value) {
-        grid[rowIdx][colIdx] = value
+        myGrid[rowIdx][colIdx] = value
+        grid.set(myGrid)
     }
 </script>
 
@@ -11,7 +15,7 @@
 </main>
 
 <div class="grid">
-    {#each grid as row, rowIdx}
+    {#each myGrid as row, rowIdx}
         {#each row as value, colIdx}
             <div class="cell">
                 <input bind:value on:change={() => setValue(rowIdx, colIdx, value)} />
@@ -23,10 +27,10 @@
 
 <style>
     .grid {
-        /* width: 200px; */
+        /* width: 193px; */
         /* height: 240px; */
         border: 1px solid white;
-        /* display: flexbox; */
+        display: flexbox;
     }
     input {
         box-sizing: border-box;
