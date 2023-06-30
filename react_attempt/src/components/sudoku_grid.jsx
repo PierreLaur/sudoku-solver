@@ -8,7 +8,6 @@ function Cell({ id }) {
     const handleChange = (e) => {
         setValue(e.target.value)
     }
-    console.log(id)
 
     return <input type="text" id={id} className="cell" value={value} onChange={handleChange} maxLength={1} />
 }
