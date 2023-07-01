@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { grid } from "./stores"
+    import { grid } from "./grid_store"
     let apiOutput: string = ""
 
     function process_result(data) {

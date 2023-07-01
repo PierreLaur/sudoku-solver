@@ -1,21 +1,20 @@
 <script>
-    import { grid } from "./stores"
-    let myGrid = new Array(9).fill(null).map(() => new Array(9).fill(null))
+    import { grid } from "./grid_store"
+    import { fade } from "svelte/transition"
+    let myGrid = new Array(9).fill("").map(() => new Array(9).fill(""))
     grid.set(myGrid)
     grid.subscribe((value) => (myGrid = value))
 
-    function setValue(rowIdx, colIdx, value) {
-        let input = parseInt(value)
-        if (!isNaN(input) && input >= 1 && input <= 9) {
-            myGrid[rowIdx][colIdx] = value
-        } else {
-            myGrid[rowIdx][colIdx] = null
-        }
+    $: myGrid = myGrid.map((row) => row.map(setValue))
+
+    function setValue(cell) {
+        const result = cell.replace(/[^1-9]/g, "")
         grid.set(myGrid)
+        return result
     }
 
     function clearValue(rowIdx, colIdx) {
-        myGrid[rowIdx][colIdx] = null
+        myGrid[rowIdx][colIdx] = ""
         grid.set(myGrid)
     }
 </script>
@@ -27,13 +26,9 @@
 <div class="grid">
     {#each myGrid as row, rowIdx}
         <div class="row">
-            {#each row as value, colIdx}
+            {#each row as value, colIdx (value + (rowIdx * 9).toString() + colIdx.toString())}
                 <div class="cell">
-                    <input
-                        bind:value
-                        on:change={() => setValue(rowIdx, colIdx, value)}
-                        on:click={() => clearValue(rowIdx, colIdx)}
-                    />
+                    <input bind:value on:click={() => clearValue(rowIdx, colIdx)} />
                 </div>
             {/each}
             <br />
@@ -43,9 +38,19 @@
 
 <style>
     .grid {
-        display: flexbox;
-        border: 2px solid black;
+        display: grid;
+        border: 1px solid black;
     }
+
+    @keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+
     input {
         box-sizing: border-box;
         width: 100%;
@@ -56,6 +61,8 @@
         color: black;
         font-size: 30px;
         border: none;
+        transition: background-color 0.4s;
+        animation: fadeIn 1s;
     }
 
     input:hover {
@@ -73,7 +80,19 @@
     input:focus {
         outline: none;
         background-color: lightsalmon;
-        caret-color: lightsalmon;
+        caret-color: transparent;
+    }
+
+    input:hover {
+        background-color: lightcyan;
+    }
+
+    .cell:first-child {
+        border-left: 3px solid black;
+    }
+
+    .row:first-child {
+        border-top: 3px solid black;
     }
 
     .cell:nth-child(3n) {
