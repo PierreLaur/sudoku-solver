@@ -59,6 +59,7 @@ def solve(grid):
             )
 
     solver = cp_model.CpSolver()
+    solver.parameters.subsolvers.extend(["core", "default_lp", "no_lp"])
     status = solver.Solve(model)
 
     if status in (cp_model.FEASIBLE, cp_model.OPTIMAL):

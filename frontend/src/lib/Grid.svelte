@@ -5,32 +5,46 @@
     grid.subscribe((value) => (myGrid = value))
 
     function setValue(rowIdx, colIdx, value) {
-        myGrid[rowIdx][colIdx] = value
+        let input = parseInt(value)
+        if (!isNaN(input) && input >= 1 && input <= 9) {
+            myGrid[rowIdx][colIdx] = value
+        } else {
+            myGrid[rowIdx][colIdx] = null
+        }
+        grid.set(myGrid)
+    }
+
+    function clearValue(rowIdx, colIdx) {
+        myGrid[rowIdx][colIdx] = null
         grid.set(myGrid)
     }
 </script>
 
 <main>
-    <p>Fill the grid</p>
+    <h2>Fill the grid</h2>
 </main>
 
 <div class="grid">
     {#each myGrid as row, rowIdx}
-        {#each row as value, colIdx}
-            <div class="cell">
-                <input bind:value on:change={() => setValue(rowIdx, colIdx, value)} />
-            </div>
-        {/each}
-        <br />
+        <div class="row">
+            {#each row as value, colIdx}
+                <div class="cell">
+                    <input
+                        bind:value
+                        on:change={() => setValue(rowIdx, colIdx, value)}
+                        on:click={() => clearValue(rowIdx, colIdx)}
+                    />
+                </div>
+            {/each}
+            <br />
+        </div>
     {/each}
 </div>
 
 <style>
     .grid {
-        /* width: 193px; */
-        /* height: 240px; */
-        border: 1px solid white;
         display: flexbox;
+        border: 2px solid black;
     }
     input {
         box-sizing: border-box;
@@ -39,6 +53,8 @@
         text-align: center;
         margin: 0;
         background-color: transparent;
+        color: black;
+        font-size: 30px;
         border: none;
     }
 
@@ -46,14 +62,25 @@
         cursor: pointer;
     }
     .cell {
-        width: 20px;
-        height: 20px;
-        /* margin: 1px; */
+        width: 50px;
+        height: 50px;
         display: inline-block;
         border-radius: 0;
-        background-color: grey;
-        border: 1px solid white;
-        /* flex: 1; */
-        /* display: flex; */
+        background-color: darkgrey;
+        border: 1px solid whitesmoke;
+    }
+
+    input:focus {
+        outline: none;
+        background-color: lightsalmon;
+        caret-color: lightsalmon;
+    }
+
+    .cell:nth-child(3n) {
+        border-right: 3px solid black;
+    }
+
+    .row:nth-child(3n) {
+        border-bottom: 3px solid black;
     }
 </style>
