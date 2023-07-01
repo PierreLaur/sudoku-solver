@@ -42,12 +42,18 @@
         border: 1px solid black;
     }
 
-    @keyframes fadeIn {
+    @keyframes slideFadeIn {
         0% {
-            opacity: 0;
+            transform: scale(0.1);
+        }
+        30% {
+            transform: scale(1.2);
+        }
+        60% {
+            transform: scale(0.8);
         }
         100% {
-            opacity: 1;
+            transform: scale(1);
         }
     }
 
@@ -62,7 +68,7 @@
         font-size: 30px;
         border: none;
         transition: background-color 0.4s;
-        animation: fadeIn 1s;
+        animation: slideFadeIn 0.5s;
     }
 
     input:hover {

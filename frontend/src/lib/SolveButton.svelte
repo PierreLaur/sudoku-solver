@@ -1,13 +1,10 @@
 <script lang="ts">
     import { grid } from "./grid_store"
-    let apiOutput: string = ""
 
     function process_result(data) {
         if (data.status == 1) {
-            apiOutput = "solve failed"
         } else {
             grid.set(data.grid)
-            apiOutput = ""
         }
     }
 
@@ -26,12 +23,11 @@
 
 <main>
     <button on:click={callBackend}> Solve </button>
-    <p>{apiOutput}</p>
 </main>
 
 <style>
     button {
-        width: 300px;
+        width: 200px;
         font-size: 30px;
     }
 </style>
