@@ -34,4 +34,42 @@
         width: 300px;
         font-size: 30px;
     }
+
+    button {
+        width: 300px;
+        font-size: 30px;
+    }
+
+    button {
+        width: 300px;
+        font-size: 30px;
+    }
+    button {
+        width: 300px;
+        font-size: 30px;
+    }
+    button {
+        width: 300px;
+        font-size: 30px;
+    }
+    button {
+        width: 300px;
+        font-size: 30px;
+    }
+    button {
+        width: 300px;
+        font-size: 30px;
+    }
+    button {
+        width: 300px;
+        font-size: 30px;
+    }
+    button {
+        width: 300px;
+        font-size: 30px;
+    }
+    button {
+        width: 300px;
+        font-size: 30px;
+    }
 </style>
